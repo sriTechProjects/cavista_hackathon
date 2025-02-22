@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+// const authorize = require('./config/authorize');
 
 const app = express();
 
@@ -27,6 +28,8 @@ app.use("/api/auth/hcInventory", HealthCareAuths);
 app.use("/api/auth/Suppliers", SuppliersAuths);
 app.use("/api", TokenVerify);
 app.use("/api/hcInventory", HealthCareRoutes);
+
+// app.get('/users',authorize(["Admin"]),getAllusers);
 
 const PORT = process.env.PORT || 8000;
 
