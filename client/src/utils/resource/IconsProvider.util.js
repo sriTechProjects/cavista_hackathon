@@ -20,6 +20,7 @@ import { IoSearch } from "react-icons/io5";
 import { BiExport } from "react-icons/bi";
 
 
+
 export {
     FaStore,
     FaBasketShopping,
@@ -54,4 +55,5 @@ export {
     IoBagHandle,
     IoSearch,
     BiExport,
+ 
 }

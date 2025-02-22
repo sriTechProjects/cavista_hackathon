@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -41,21 +41,21 @@ const BarChart = () => {
     ],
     datasets: [
       {
-        label: "Revenue (Rs.)",
+        label: "Monthly Product Consumed",
         data: [
           1500, 2200, 1800, 2500, 3200, 2700, 2900, 3100, 2800, 3500,
           4000, 3800,
         ],
-        backgroundColor: "rgba(54, 162, 235, 0.7)", // Blue
+        backgroundColor: "rgba(54, 162, 235, 0.7)",
         borderRadius: 4,
       },
       {
-        label: "Orders",
+        label: "Stock Reordering",
         data: [
           1000, 1300, 1190, 1590, 1670, 3960, 2255, 3380, 1075, 1930, 5200,
           2610,
         ],
-        backgroundColor: "rgba(255, 99, 132, 0.7)", // Red
+        backgroundColor: "rgba(255, 99, 132, 0.7)", 
         borderRadius: 4,
       },
     ],

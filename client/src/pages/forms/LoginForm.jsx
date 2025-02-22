@@ -1,23 +1,25 @@
-import React, { useState } from "react";
+import { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  InputFieldComponent,
-  PasswordFieldComponent,
-  FormBtn,
-} from "../../utils/resource/ComponentsProvider.util";
 
-import {
-  MdEmail,
-  FcGoogle,
-  RiLockPasswordFill,
-  FaUserLock,
-} from "../../utils/resource/IconsProvider.util";
+// form components
+// import InputFieldComponent from "./InputFieldComponent";
 
-import images from "../../utils/resource/ImageProvider.util";
-import axiosinstance from "../../utils/validator/axiosInstance";
+// import images from "../../utils/resource/ImageProvider.util";
 import { Link, useNavigate } from "react-router-dom";
+import InputFieldComponent from "../../components/form_components/InputFieldComponent";
+import { MdEmail } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
+import PasswordFieldComponent from "../../components/form_components/PasswordFieldComponent";
+import FormBtn from "../../components/form_components/FormBtn";
+import { AuthContext } from "../../contexts/AuthContext";
+import { FaUserLock } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import axios from "axios";
+
 const LoginForm = () => {
+  const { currentUser, setCurrent, refreshLoginContext, loading, setLoading } =
+    useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -34,16 +36,20 @@ const LoginForm = () => {
     }
 
     try {
-      const response = await axiosinstance.post(
-        "/saarthi/auth/signin",
+      const response = await axios.post(
+        "http://localhost:8000/api/auth/hcInventory/signin",
         { email, password },
         { withCredentials: true }
       );
 
       if (response.status === 200) {
         toast.success("Login successful!");
-        console.log("User Data:", response.data);
-        navigate("/");
+        setLoading(true);
+        setTimeout(async () => {
+          await refreshLoginContext();
+          setLoading(false);
+          navigate("/");
+        }, 1000);
       }
     } catch (error) {
       console.error("Login Error:", error.response?.data || error.message);
@@ -52,13 +58,8 @@ const LoginForm = () => {
   };
 
   return (
-    <>
-      <div className="absolute top-0 left-0 w-full bg-white flex items-center justify-start px-8 mt-2">
-        <span>
-          <img src={images.logo} alt="logo" className="w-32" />
-        </span>
-      </div>
-      <div className="w-full max-w-md bg-white rounded-lg p-6 flex flex-col gap-8">
+    <div className="w-screen h-screen flex justify-center items-center bg-[#333]">
+      <div className="w-full max-w-md bg-white rounded-lg p-6 flex flex-col gap-8 border">
         <header className="flex flex-col items-center gap-1">
           <div className="h-10 w-10 border border-[#e0e0e0] text-primary-txt rounded-lg flex items-center justify-center mb-5 ">
             <FaUserLock className="h-5 w-5" />
@@ -130,7 +131,7 @@ const LoginForm = () => {
           </button>
 
           <p className="text-sm text-center text-primary-txt font-light">
-            Don't have an account?{" "}
+            <p>Dont have an account?</p>{" "}
             <Link
               to="/auth/customer-registration"
               className="text-link font-medium"
@@ -140,7 +141,7 @@ const LoginForm = () => {
           </p>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 

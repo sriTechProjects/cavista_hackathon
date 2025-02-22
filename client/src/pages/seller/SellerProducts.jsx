@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { products } from "../../utils/resource/DataProvider.util";
-import { GrUpdate } from "react-icons/gr";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { FaRegStar } from "react-icons/fa";
 import { IoAdd } from "react-icons/io5";
@@ -9,7 +8,7 @@ import AddNewProductForm from "../../components/seller_components/seller_product
 
 const ITEMS_PER_PAGE = 10;
 const getStatustColor = (status) => {
-  return status === "available"
+  return status === "Available"
     ? "bg-success-op text-success border border-success"
     : "bg-danger-op text-danger border border-danger";
 };
@@ -53,17 +52,17 @@ const SellerProducts = () => {
         </div>
       </header>
 
-      {/* Table */}
+      
       <table className="w-full border-collapse">
-        {/* Table Head */}
+       
         <thead className="bg-[#f7f7f7] text-primary-text uppercase text-sm">
           <tr>
             {[
               "#",
               "Name",
               "Category",
-              "Price (Rs).",
-              "Unit",
+              "Sub Category",
+              "Count",
               "Status",
               "Actions",
             ].map((heading, index) => (
@@ -77,7 +76,7 @@ const SellerProducts = () => {
           </tr>
         </thead>
 
-        {/* Table Body */}
+        
         <tbody>
           {displayedProducts.map((product, index) => (
             <tr key={product.id} className="border-b transition text-sm">
@@ -86,8 +85,8 @@ const SellerProducts = () => {
               </td>
               <td className="py-3 px-5 text-center">{product.name}</td>
               <td className="py-3 px-5 text-center">{product.category}</td>
-              <td className="py-3 px-5 text-center">{product.price}</td>
-              <td className="py-3 px-5 text-center">{product.unit}</td>
+              <td className="py-3 px-5 text-center">{product.subCategory}</td>
+              <td className="py-3 px-5 text-center">{product.count}</td>
               <td className="py-3 px-5 text-center flex justify-center">
                 <p
                   className={`w-fit rounded-full px-2  py-1 ${getStatustColor(
@@ -98,9 +97,6 @@ const SellerProducts = () => {
                 </p>
               </td>
               <td className="py-2 px-5 text-center space-x-2">
-                <button className="border p-2 rounded-md">
-                  <GrUpdate />
-                </button>
                 <button className="border p-2 rounded-md">
                   <RiDeleteBin7Line />
                 </button>
@@ -113,7 +109,7 @@ const SellerProducts = () => {
         </tbody>
       </table>
 
-      {/* Pagination Footer */}
+
       <div className="flex justify-between items-center p-4 border-t">
         <button
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
