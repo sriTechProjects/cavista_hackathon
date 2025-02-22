@@ -1,0 +1,22 @@
+{
+    "fullName" :{
+        "firstName" : "Amrik",
+        "lastName" : "Bhadra"
+    },
+    "email" : "amrik.bhadra@mitaoe.ac.in",
+    "phoneNo": "7739226540",
+    "shopName" : "Bhadra's Shop",
+    "shopAddress" : {
+        "street" : "",
+        "landmark" : "",
+        "city" : "pune",
+        "state" : "Maharashtra",
+        "country" : "India",
+        "zip" : "412105"
+    },
+    "age" : 21,
+    "gender" : "male",
+    "2fa" : false,
+    "ratings" : "",
+    "reviews" : ""
+}
