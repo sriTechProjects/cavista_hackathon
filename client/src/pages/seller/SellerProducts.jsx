@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
-import { products } from "../../utils/resource/DataProvider.util";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { FaRegStar } from "react-icons/fa";
 import { IoAdd } from "react-icons/io5";
 import AddNewProductForm from "../../components/seller_components/seller_product_components/AddNewProductForm";
 import { io } from "socket.io-client";
+import axios from "axios";
 
 const socket = io("http://localhost:8000");
 const ITEMS_PER_PAGE = 10;
-const getStatustColor = (status) => {
+
+const getStatusColor = (status) => {
   return status === "Available"
     ? "bg-success-op text-success border border-success"
     : "bg-danger-op text-danger border border-danger";
@@ -18,6 +19,7 @@ const getStatustColor = (status) => {
 const SellerProducts = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [products, setProducts] = useState([]);
   const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
 
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -26,26 +28,38 @@ const SellerProducts = () => {
     startIndex + ITEMS_PER_PAGE
   );
 
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/api/products/getAll"
+      );
+      setProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
   useEffect(() => {
+    fetchProducts();
+
     socket.on("orderUpdated", (data) => {
       console.log("Order Updated:", data.message);
-      alert(`Order Updated: ${data.message}`); // Example UI feedback
+      alert(`Order Updated: ${data.message}`);
     });
 
     socket.on("orderCreated", (data) => {
       console.log("New Order Created:", data.message);
-      alert(`New Order: ${data.message}`); // Example UI feedback
+      alert(`New Order: ${data.message}`);
     });
 
     return () => {
       socket.off("orderUpdated");
       socket.off("orderCreated");
     };
-  }, []);
+  }, [products]);
 
   return (
     <div className="relative w-full border rounded-md shadow-sm bg-white mt-2">
-      {/* Header with Search Bar */}
       <header className="py-3 px-5 flex justify-between items-center border-b">
         <h3 className="text-lg font-medium text-primary-text">Product List</h3>
         <div className="flex items-center gap-x-3">
@@ -57,58 +71,44 @@ const SellerProducts = () => {
               className="w-40 outline-none bg-transparent text-sm"
             />
           </div>
-
           <button
             className="text-sm bg-primary-txt px-3 py-2 rounded-md text-white flex items-center gap-x-2"
-            onClick={() => {
-              setIsFormOpen(!isFormOpen);
-            }}
+            onClick={() => setIsFormOpen(!isFormOpen)}
           >
             <IoAdd className="text-lg" />
             <p>Add Product</p>
           </button>
         </div>
       </header>
-
       <table className="w-full border-collapse">
         <thead className="bg-[#f7f7f7] text-primary-text uppercase text-sm">
           <tr>
-            {[
-              "#",
-              "Name",
-              "Category",
-              "Sub Category",
-              "Count",
-              "Status",
-              "Actions",
-            ].map((heading, index) => (
-              <th
-                key={index}
-                className="px-5 py-3 text-center font-medium text-sm"
-              >
-                {heading}
-              </th>
-            ))}
+            {["#", "Name", "Category", "Quantity", "Status", "Actions"].map(
+              (heading, index) => (
+                <th
+                  key={index}
+                  className="px-5 py-3 text-center font-medium text-sm"
+                >
+                  {heading}
+                </th>
+              )
+            )}
           </tr>
         </thead>
-
         <tbody>
           {displayedProducts.map((product, index) => (
             <tr key={product.id} className="border-b transition text-sm">
               <td className="py-3 px-5 text-center">
                 {startIndex + index + 1}
               </td>
-              <td className="py-3 px-5 text-center">{product.name}</td>
-              <td className="py-3 px-5 text-center">{product.category}</td>
-              <td className="py-3 px-5 text-center">{product.subCategory}</td>
-              <td className="py-3 px-5 text-center">{product.count}</td>
+              <td className="py-3 px-5 text-center">{product.product_name}</td>
+              <td className="py-3 px-5 text-center">{product.SubCategory}</td>
+              <td className="py-3 px-5 text-center">{product.product_qty}</td>
               <td className="py-3 px-5 text-center flex justify-center">
                 <p
-                  className={`w-fit rounded-full px-2  py-1 ${getStatustColor(
-                    product.status
-                  )}`}
+                  className={`w-fit rounded-full px-2 py-1 ${getStatusColor(product.status)}`}
                 >
-                  {product.status}
+                  {product.product_qty > 50 ? "Available" : "Out of Stock"}
                 </p>
               </td>
               <td className="py-2 px-5 text-center space-x-2">
@@ -123,7 +123,6 @@ const SellerProducts = () => {
           ))}
         </tbody>
       </table>
-
       <div className="flex justify-between items-center p-4 border-t">
         <button
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
@@ -145,16 +144,7 @@ const SellerProducts = () => {
           Next
         </button>
       </div>
-
-      {isFormOpen ? (
-        <AddNewProductForm
-          onClose={() => {
-            setIsFormOpen(false);
-          }}
-        />
-      ) : (
-        <></>
-      )}
+      {isFormOpen && <AddNewProductForm onClose={() => setIsFormOpen(false)} />}
     </div>
   );
 };
