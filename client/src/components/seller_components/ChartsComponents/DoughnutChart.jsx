@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -8,15 +8,13 @@ import {
   Title,
 } from "chart.js";
 
-// Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend, Title);
 
 const DoughnutChart = () => {
   const [selectedYear, setSelectedYear] = useState("");
 
-  // Sample Product Sales Data
   const data = {
-    labels: ["Product A", "Product B", "Product C", "Product D", "Product E"],
+    labels: ["Pharmaceuticals", "PPE", "Medical Devices", "Consumables", "Personal Care"],
     datasets: [
       {
         label: "Sales (Units)",
@@ -44,17 +42,17 @@ const DoughnutChart = () => {
       },
       title: {
         display: false,
-        text: "Product Sales Distribution",
+        text: "",
         font: { size: 16 },
       },
     },
-    cutout: "50%", // This makes it a doughnut chart by adding a hole in the center
+    cutout: "50%", 
   };
 
   return (
     <div className="w-1/3 bg-white p-4 rounded-md shadow-sm border">
       <header className="flex justify-between items-center mb-3">
-        <h2 className="text-lg font-medium text-primary-txt">Product Sales</h2>
+        <h2 className="text-lg font-medium text-primary-txt">Category Sales</h2>
         <div className="flex gap-3">
           {/* Year Dropdown */}
           <select

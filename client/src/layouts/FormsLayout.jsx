@@ -1,18 +1,13 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
-import images from "../utils/resource/ImageProvider.util";
+import warehouse from '../assets/images/warehouse.jpg'
+
 
 const FormsLayout = () => {
   return (
     <section className="h-screen flex p-1">
       <div className="relative w-0 sm:w-[40%] md:w-[55%] lg:w-[65%] h-full rounded-tl-3xl rounded-br-3xl overflow-hidden">
-        <video
-          src={images.formVideo}
-          autoPlay
-          loop
-          muted
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-        ></video>
+        
+        <img src={warehouse} style={{ width: "100%", height: "100%", objectFit: "cover" }} alt="" />
         <div
           className="absolute top-0 left-0 w-full h-full"
           style={{

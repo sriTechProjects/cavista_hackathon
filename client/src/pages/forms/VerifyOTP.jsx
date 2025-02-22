@@ -1,10 +1,9 @@
-import React from "react";
 import {
   MdOutlineVerifiedUser,
   IoMdArrowBack,
 } from "../../utils/resource/IconsProvider.util";
 import { FormBtn } from "../../utils/resource/ComponentsProvider.util";
-import images from "../../utils/resource/ImageProvider.util"
+import logo from "../../assets/images/inventory.png"
 import { useNavigate } from "react-router-dom";
 
 const VerifyOTP = () => {
@@ -17,7 +16,7 @@ const VerifyOTP = () => {
     <>
         <div className="absolute top-0 left-0 w-full bg-white flex items-center justify-between px-8 mt-2">
             <span>
-                <img src={images.logo} alt="logo" className="w-32" />
+                <img src={logo} alt="logo" className="w-32" />
             </span>
             <a href="/auth/login" className="text-link underline font-medium">
                 Create Account
@@ -65,7 +64,7 @@ const VerifyOTP = () => {
             <FormBtn btnText="Verify OTP" onClick={handleVerifyOtp} />
 
             <p className="text-sm text-center text-primary-txt font-light">
-              Didn't receive the OTP?{" "}
+              Didnt receive the OTP?{" "}
               <button className="text-link font-medium ml-1">Resend OTP</button>
             </p>
 

@@ -1,11 +1,11 @@
-import React from "react";
+
 import KpiCards from "../../components/seller_components/seller_dashboard_components/KpiCards";
 import {
   FaProductHunt,
-  FaMoneyBillTrendUp,
-  IoPeople,
   IoBagHandle,
 } from "../../utils/resource/IconsProvider.util";
+import { GiCardDiscard } from "react-icons/gi";
+import { MdOutlinePendingActions } from "react-icons/md";
 
 import {BarChart, DoughnutChart} from '../../utils/resource/ComponentsProvider.util'
 
@@ -19,14 +19,14 @@ const SellerDashboard = () => {
           icon={<FaProductHunt />}
         />
         <KpiCards
-          title="Total Sales"
-          description="Rs 4540"
-          icon={<FaMoneyBillTrendUp />}
+          title="Expired Products"
+          description="145"
+          icon={<GiCardDiscard/>}
         />
         <KpiCards
-          title="Total Customers"
+          title="Pending Orders"
           description="189"
-          icon={<IoPeople />}
+          icon={<MdOutlinePendingActions />}
         />
         <KpiCards
           title="Total Orders"

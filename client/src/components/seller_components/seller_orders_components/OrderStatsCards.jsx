@@ -1,6 +1,6 @@
-import React from 'react';
 import { FaArrowUpLong, FaArrowDownLong } from "react-icons/fa6";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import PropTypes from 'prop-types'
 
 const incdata = [
   { name: 'Jan', value: 50 },
@@ -56,5 +56,12 @@ const OrderStatsCards = ({ isIncrease, title, description, value }) => {
     </div>
   );
 }
+
+OrderStatsCards.propTypes = {
+  isIncrease: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+};
 
 export default OrderStatsCards;

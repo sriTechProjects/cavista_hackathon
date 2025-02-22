@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   InputFieldComponent,
@@ -11,7 +11,7 @@ import {
   IoMdArrowBack,
 } from "../../utils/resource/IconsProvider.util";
 
-import images from "../../utils/resource/ImageProvider.util"
+import logo from "../../assets/images/inventory.png"
 
 const ForgetPassword = () => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const ForgetPassword = () => {
     <>
     <div className="absolute top-0 left-0 w-full bg-white flex items-center justify-between px-8 mt-2">
         <span>
-            <img src={images.logo} alt="logo" className="w-32" />
+            <img src={logo} alt="logo" className="w-32" />
         </span>
         <a href="/auth/login" className="text-link underline font-medium">
             Create Account
