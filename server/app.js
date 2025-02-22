@@ -1,14 +1,12 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const connectDB = require("./config/dbSetup");
 const cookieParser = require("cookie-parser");
 
 const app = express();
-const authRoutes = require("./routes/auth/authRoutes");
-
-// Connect to MongoDB
-connectDB();
+const authBeneficiaryRoutes = require("./routes/auth/HC/authRoutes");
+const authSupplierRoutes = require("./routes/auth/Supplier/authRoutes");
+const commonRoutes = require("./routes/auth/Common/comRoutes");
 
 // Middleware
 app.use(cookieParser());
@@ -23,7 +21,9 @@ app.use(
 app.use(express.json());
 
 // Routes
-app.use("/api/saarthi/auth", authRoutes);
+app.use("/api/auth/hc", authBeneficiaryRoutes);
+app.use("/api/auth/supp", authSupplierRoutes);
+app.use("/api/", commonRoutes);
 
 const PORT = process.env.PORT || 8000;
 
