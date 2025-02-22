@@ -1,18 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { products } from "../../utils/resource/DataProvider.util";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { FaRegStar } from "react-icons/fa";
 import { IoAdd } from "react-icons/io5";
 import AddNewProductForm from "../../components/seller_components/seller_product_components/AddNewProductForm";
+import { io } from "socket.io-client";
 
+const socket = io("http://localhost:8000");
 const ITEMS_PER_PAGE = 10;
 const getStatustColor = (status) => {
   return status === "Available"
     ? "bg-success-op text-success border border-success"
     : "bg-danger-op text-danger border border-danger";
 };
-
 
 const SellerProducts = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -24,6 +25,23 @@ const SellerProducts = () => {
     startIndex,
     startIndex + ITEMS_PER_PAGE
   );
+
+  useEffect(() => {
+    socket.on("orderUpdated", (data) => {
+      console.log("Order Updated:", data.message);
+      alert(`Order Updated: ${data.message}`); // Example UI feedback
+    });
+
+    socket.on("orderCreated", (data) => {
+      console.log("New Order Created:", data.message);
+      alert(`New Order: ${data.message}`); // Example UI feedback
+    });
+
+    return () => {
+      socket.off("orderUpdated");
+      socket.off("orderCreated");
+    };
+  }, []);
 
   return (
     <div className="relative w-full border rounded-md shadow-sm bg-white mt-2">
@@ -52,9 +70,7 @@ const SellerProducts = () => {
         </div>
       </header>
 
-      
       <table className="w-full border-collapse">
-       
         <thead className="bg-[#f7f7f7] text-primary-text uppercase text-sm">
           <tr>
             {[
@@ -76,7 +92,6 @@ const SellerProducts = () => {
           </tr>
         </thead>
 
-        
         <tbody>
           {displayedProducts.map((product, index) => (
             <tr key={product.id} className="border-b transition text-sm">
@@ -108,7 +123,6 @@ const SellerProducts = () => {
           ))}
         </tbody>
       </table>
-
 
       <div className="flex justify-between items-center p-4 border-t">
         <button
