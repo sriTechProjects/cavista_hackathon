@@ -7,92 +7,81 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model HCInventory {
-  id            String          @id @default(auto()) @map("_id") @db.ObjectId
-  name          String
-  email         String          @unique
-  password      String
-  phoneNo       String
-  inchargeName  String
-  address       Address?        @relation(fields: [addressId], references: [id])
-  type          HCInventoryType
-  twoFactorAuth Boolean         @default(false)
-  orders        String[]        @default([])
-  suppliers     Supplier[]
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  addressId     String?         @unique @db.ObjectId
+model roles {
+  role_id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  role_type String
+  users     users[]
 }
 
-model Address {
-  id        String       @id @default(auto()) @map("_id") @db.ObjectId
-  street    String?
-  landmark  String?
-  city      String
-  state     String
-  country   String
-  zip       String
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
-  inventory HCInventory?
+model users {
+  user_id       String @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  username String
+  email    String
+  address  String
+  role     roles?  @relation(fields: [role_id], references: [role_id])
+  role_id   String? @db.ObjectId
 }
 
-model Product {
-  id            String         @id @default(auto()) @map("_id") @db.ObjectId
-  name          String
-  category      String
-  subCategoryId String
-  unit_type     String
-  price         Float
-  status        ProductStatus? @default(available)
-  ratings       Float          @default(0)
-  reviews       Int            @default(0)
-  supplierId    String         @db.ObjectId
-  discount      Float          @default(0)
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  supplier      Supplier       @relation(fields: [supplierId], references: [id])
+model categories {
+  category_id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  category_name String
+  sub_categories sub_category[]
 }
 
-model Supplier {
-  id             String        @id @default(auto()) @map("_id") @db.ObjectId
-  companyName    String
-  email          String        @unique
-  password       String
-  phoneNo        String
-  inchargeName   String
-  products       Product[]
-  suppliedAssets String[]      @default([]) // This is fine, as it's a scalar array
-  twoFactorAuth  Boolean       @default(false)
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
-  HCInventory    HCInventory?  @relation(fields: [hCInventoryId], references: [id])
-  hCInventoryId  String?       @db.ObjectId
-  ShopAddress    ShopAddress[]
+model sub_category {
+  subcat_id           String      @id @default(auto()) @map("_id") @db.ObjectId
+  subcat_name  String
+  category     categories @relation(fields: [category_id], references: [category_id])
+  category_id   String     @db.ObjectId
+  products     products[]
 }
 
-model ShopAddress {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  street     String?
-  landmark   String?
-  city       String
-  state      String
-  country    String
-  zip        String
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-  supplier   Supplier? @relation(fields: [supplierId], references: [id])
-  supplierId String?   @db.ObjectId
+model suppliers {
+  supplier_id           String       @id @default(auto()) @map("_id") @db.ObjectId
+  supplier_name String
+  sup_email    String       @unique
+  sup_address  String
+  priority     Int
+  products     products[]
 }
 
-enum ProductStatus {
-  available
-  out_of_stock
+model products {
+  product_id              String       @id @default(auto()) @map("_id") @db.ObjectId
+  product_name    String
+  product_price   Float
+  threshold_amount Int
+  product_qty     Int
+  product_location String
+  sub_category    sub_category? @relation(fields: [subcat_id], references: [subcat_id])
+  subcat_id        String? @db.ObjectId
+  supplier        suppliers? @relation(fields: [supplier_id], references: [supplier_id])
+  supplier_id      String? @db.ObjectId
+  orders         orders[]
+  batches       batches[]
 }
 
-enum HCInventoryType {
-  hospital
-  chemist
-  pharmacy
-  clinic
+model orders {
+  order_id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  quantity     Int
+  date_of_order DateTime @default(now())
+  status       String
+  product      products @relation(fields: [product_id], references: [product_id])
+  product_id    String @db.ObjectId
+}
+
+model batches {
+  batch_id              String       @id @default(auto()) @map("_id") @db.ObjectId
+  batch_name      String
+  expiry_date     DateTime
+  quantity_in_batch Int
+  product         products @relation(fields: [product_id], references: [product_id])
+  product_id       String @db.ObjectId
+  unit           unit[]
+}
+
+model unit {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  batch       batches  @relation(fields: [batch_id], references: [batch_id])
+  batch_id     String   @db.ObjectId
 }
