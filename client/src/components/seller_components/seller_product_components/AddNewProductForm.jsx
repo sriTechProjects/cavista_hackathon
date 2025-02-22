@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
 
 const AddNewProductForm = ({ onClose, onSubmit }) => {
   const [formData, setFormData] = useState({
@@ -27,7 +28,9 @@ const AddNewProductForm = ({ onClose, onSubmit }) => {
 
         <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
           <div className="col-span-1">
-            <label className="block text-sm font-medium mb-2">Product Name</label>
+            <label className="block text-sm font-medium mb-2">
+              Product Name
+            </label>
             <input
               type="text"
               name="name"
@@ -50,17 +53,6 @@ const AddNewProductForm = ({ onClose, onSubmit }) => {
             />
           </div>
 
-          <div className="col-span-2">
-            <label className="block text-sm font-medium mb-2">Description</label>
-            <textarea
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              required
-              className="w-full border px-3 py-2 rounded-md"
-            />
-          </div>
-
           <div className="col-span-1">
             <label className="block text-sm font-medium mb-2">Unit Type</label>
             <input
@@ -74,7 +66,9 @@ const AddNewProductForm = ({ onClose, onSubmit }) => {
           </div>
 
           <div className="col-span-1">
-            <label className="block text-sm font-medium mb-2">Unit Price (Rs.)</label>
+            <label className="block text-sm font-medium mb-2">
+              Unit Price (Rs.)
+            </label>
             <input
               type="number"
               name="price"
@@ -83,31 +77,6 @@ const AddNewProductForm = ({ onClose, onSubmit }) => {
               required
               className="w-full border px-3 py-2 rounded-md"
             />
-          </div>
-
-          <div className="col-span-1">
-            <label className="block text-sm font-medium mb-2">Unit Actual Price (Rs.)</label>
-            <input
-              type="number"
-              name="actualPrice"
-              value={formData.actualPrice}
-              onChange={handleChange}
-              required
-              className="w-full border px-3 py-2 rounded-md"
-            />
-          </div>
-
-          <div className="col-span-1">
-            <label className="block text-sm font-medium mb-2">Status</label>
-            <select
-              name="status"
-              value={formData.status}
-              onChange={handleChange}
-              className="w-full border px-3 py-2 rounded-md"
-            >
-              <option value="available">Available</option>
-              <option value="out of stock">Out of Stock</option>
-            </select>
           </div>
 
           <div className="col-span-2 flex justify-between mt-4">
@@ -129,6 +98,11 @@ const AddNewProductForm = ({ onClose, onSubmit }) => {
       </div>
     </div>
   );
+};
+
+AddNewProductForm.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default AddNewProductForm;

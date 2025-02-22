@@ -16,7 +16,7 @@ const signinHCInventory = asyncHandler(async (req, res) => {
   try {
     // Find HCInventory by email
     const hcInventory = await prisma.hCInventory.findUnique({
-      where: { email },
+      where: { email: email },
     });
 
     if (!hcInventory) {
@@ -33,9 +33,6 @@ const signinHCInventory = asyncHandler(async (req, res) => {
       process.env.JWT_SECRET_KEY,
       { expiresIn: "7d" }
     );
-
-    3;
-    2;
 
     res.cookie("token", token, {
       httpOnly: true,

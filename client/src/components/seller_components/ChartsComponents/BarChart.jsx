@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import ImageScanner from "../seller_imageScanner/ImageScanner";
 
 // Register Chart.js components
 ChartJS.register(
@@ -43,8 +44,8 @@ const BarChart = () => {
       {
         label: "Monthly Product Consumed",
         data: [
-          1500, 2200, 1800, 2500, 3200, 2700, 2900, 3100, 2800, 3500,
-          4000, 3800,
+          1500, 2200, 1800, 2500, 3200, 2700, 2900, 3100, 2800, 3500, 4000,
+          3800,
         ],
         backgroundColor: "rgba(54, 162, 235, 0.7)",
         borderRadius: 4,
@@ -55,7 +56,7 @@ const BarChart = () => {
           1000, 1300, 1190, 1590, 1670, 3960, 2255, 3380, 1075, 1930, 5200,
           2610,
         ],
-        backgroundColor: "rgba(255, 99, 132, 0.7)", 
+        backgroundColor: "rgba(255, 99, 132, 0.7)",
         borderRadius: 4,
       },
     ],
@@ -74,13 +75,13 @@ const BarChart = () => {
     scales: {
       x: {
         grid: {
-          drawOnChartArea: false, 
+          drawOnChartArea: false,
         },
       },
       y: {
         beginAtZero: true,
         grid: {
-          color: "rgba(200, 200, 200, 0.3)", 
+          color: "rgba(200, 200, 200, 0.3)",
         },
       },
     },
@@ -105,6 +106,7 @@ const BarChart = () => {
       </header>
       <main>
         <Bar data={data} options={options} />
+        <ImageScanner />
       </main>
     </div>
   );

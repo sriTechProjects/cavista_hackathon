@@ -1,166 +1,165 @@
 const products = [
   {
-    "id": "P001",
-    "name": "Paracetamol 500mg",
-    "category": "Pharmaceuticals",
-    "subCategory": "OTC Drugs",
-    "count": 150,
-    "status": "Available"
+    id: "P001",
+    name: "Paracetamol 500mg",
+    category: "Pharmaceuticals",
+    subCategory: "OTC Drugs",
+    count: 150,
+    status: "Available",
   },
   {
-    "id": "P002",
-    "name": "Amoxicillin 250mg",
-    "category": "Pharmaceuticals",
-    "subCategory": "Prescription Drugs",
-    "count": 80,
-    "status": "Available"
+    id: "P002",
+    name: "Amoxicillin 250mg",
+    category: "Pharmaceuticals",
+    subCategory: "Prescription Drugs",
+    count: 80,
+    status: "Available",
   },
   {
-    "id": "P003",
-    "name": "Cetirizine 10mg",
-    "category": "Pharmaceuticals",
-    "subCategory": "OTC Drugs",
-    "count": 200,
-    "status": "Available"
+    id: "P003",
+    name: "Cetirizine 10mg",
+    category: "Pharmaceuticals",
+    subCategory: "OTC Drugs",
+    count: 200,
+    status: "Available",
   },
   {
-    "id": "P004",
-    "name": "Metformin 500mg",
-    "category": "Pharmaceuticals",
-    "subCategory": "Prescription Drugs",
-    "count": 120,
-    "status": "Available"
+    id: "P004",
+    name: "Metformin 500mg",
+    category: "Pharmaceuticals",
+    subCategory: "Prescription Drugs",
+    count: 120,
+    status: "Available",
   },
   {
-    "id": "P005",
-    "name": "Insulin Injection",
-    "category": "Pharmaceuticals",
-    "subCategory": "Specialty Drugs",
-    "count": 50,
-    "status": "Out of Stock"
+    id: "P005",
+    name: "Insulin Injection",
+    category: "Pharmaceuticals",
+    subCategory: "Specialty Drugs",
+    count: 50,
+    status: "Out of Stock",
   },
   {
-    "id": "P006",
-    "name": "Surgical Gloves (Latex-Free)",
-    "category": "PPE",
-    "subCategory": "Gloves",
-    "count": 500,
-    "status": "Available"
+    id: "P006",
+    name: "Surgical Gloves (Latex-Free)",
+    category: "PPE",
+    subCategory: "Gloves",
+    count: 500,
+    status: "Available",
   },
   {
-    "id": "P007",
-    "name": "N95 Respirator Mask",
-    "category": "PPE",
-    "subCategory": "Masks",
-    "count": 300,
-    "status": "Available"
+    id: "P007",
+    name: "N95 Respirator Mask",
+    category: "PPE",
+    subCategory: "Masks",
+    count: 300,
+    status: "Available",
   },
   {
-    "id": "P008",
-    "name": "Digital Thermometer",
-    "category": "Medical Devices",
-    "subCategory": "Diagnostic Tools",
-    "count": 75,
-    "status": "Available"
+    id: "P008",
+    name: "Digital Thermometer",
+    category: "Medical Devices",
+    subCategory: "Diagnostic Tools",
+    count: 75,
+    status: "Available",
   },
   {
-    "id": "P009",
-    "name": "Blood Pressure Monitor",
-    "category": "Medical Devices",
-    "subCategory": "Diagnostic Tools",
-    "count": 40,
-    "status": "Out of Stock"
+    id: "P009",
+    name: "Blood Pressure Monitor",
+    category: "Medical Devices",
+    subCategory: "Diagnostic Tools",
+    count: 40,
+    status: "Out of Stock",
   },
   {
-    "id": "P010",
-    "name": "Glucometer Strips (50-pack)",
-    "category": "Medical Devices",
-    "subCategory": "Testing Kits",
-    "count": 100,
-    "status": "Available"
+    id: "P010",
+    name: "Glucometer Strips (50-pack)",
+    category: "Medical Devices",
+    subCategory: "Testing Kits",
+    count: 100,
+    status: "Available",
   },
   {
-    "id": "P011",
-    "name": "Cotton Bandage Roll",
-    "category": "Consumables",
-    "subCategory": "Bandages",
-    "count": 300,
-    "status": "Available"
+    id: "P011",
+    name: "Cotton Bandage Roll",
+    category: "Consumables",
+    subCategory: "Bandages",
+    count: 300,
+    status: "Available",
   },
   {
-    "id": "P012",
-    "name": "Alcohol Swabs (100-pack)",
-    "category": "Consumables",
-    "subCategory": "Cleaning Supplies",
-    "count": 500,
-    "status": "Available"
+    id: "P012",
+    name: "Alcohol Swabs (100-pack)",
+    category: "Consumables",
+    subCategory: "Cleaning Supplies",
+    count: 500,
+    status: "Available",
   },
   {
-    "id": "P013",
-    "name": "IV Catheter 20G",
-    "category": "Consumables",
-    "subCategory": "Catheters",
-    "count": 60,
-    "status": "Out of Stock"
+    id: "P013",
+    name: "IV Catheter 20G",
+    category: "Consumables",
+    subCategory: "Catheters",
+    count: 60,
+    status: "Out of Stock",
   },
   {
-    "id": "P014",
-    "name": "Nebulizer Machine",
-    "category": "Medical Devices",
-    "subCategory": "Therapeutic Devices",
-    "count": 25,
-    "status": "Available"
+    id: "P014",
+    name: "Nebulizer Machine",
+    category: "Medical Devices",
+    subCategory: "Therapeutic Devices",
+    count: 25,
+    status: "Available",
   },
   {
-    "id": "P015",
-    "name": "Vitamin C Tablets",
-    "category": "Health and Wellness",
-    "subCategory": "Vitamins",
-    "count": 150,
-    "status": "Available"
+    id: "P015",
+    name: "Vitamin C Tablets",
+    category: "Health and Wellness",
+    subCategory: "Vitamins",
+    count: 150,
+    status: "Available",
   },
   {
-    "id": "P016",
-    "name": "Calcium Tablets",
-    "category": "Health and Wellness",
-    "subCategory": "Vitamins",
-    "count": 180,
-    "status": "Available"
+    id: "P016",
+    name: "Calcium Tablets",
+    category: "Health and Wellness",
+    subCategory: "Vitamins",
+    count: 180,
+    status: "Available",
   },
   {
-    "id": "P017",
-    "name": "Pregnancy Test Kit",
-    "category": "Laboratory Supplies",
-    "subCategory": "Testing Kits",
-    "count": 100,
-    "status": "Available"
+    id: "P017",
+    name: "Pregnancy Test Kit",
+    category: "Laboratory Supplies",
+    subCategory: "Testing Kits",
+    count: 100,
+    status: "Available",
   },
   {
-    "id": "P018",
-    "name": "First-Aid Kit",
-    "category": "Emergency Supplies",
-    "subCategory": "First-Aid",
-    "count": 40,
-    "status": "Available"
+    id: "P018",
+    name: "First-Aid Kit",
+    category: "Emergency Supplies",
+    subCategory: "First-Aid",
+    count: 40,
+    status: "Available",
   },
   {
-    "id": "P019",
-    "name": "Sanitary Pads (10-pack)",
-    "category": "Personal Care",
-    "subCategory": "Hygiene Products",
-    "count": 400,
-    "status": "Available"
+    id: "P019",
+    name: "Sanitary Pads (10-pack)",
+    category: "Personal Care",
+    subCategory: "Hygiene Products",
+    count: 400,
+    status: "Available",
   },
   {
-    "id": "P020",
-    "name": "Adult Diapers (10-pack)",
-    "category": "Personal Care",
-    "subCategory": "Hygiene Products",
-    "count": 60,
-    "status": "Out of Stock"
-  }
-]
-
+    id: "P020",
+    name: "Adult Diapers (10-pack)",
+    category: "Personal Care",
+    subCategory: "Hygiene Products",
+    count: 60,
+    status: "Out of Stock",
+  },
+];
 
 const orders = [
   {
@@ -169,7 +168,7 @@ const orders = [
     date: "10-02-2025",
     amount: 2096,
     payment: "Paid",
-    status: "Delivered"
+    status: "Delivered",
   },
   {
     orderId: 2,
@@ -177,23 +176,33 @@ const orders = [
     date: "09-02-2025",
     amount: 3850,
     payment: "Pending",
-    status: "Processing"
+    status: "Processing",
   },
   {
     orderId: 3,
-    items: ["Antiseptic Cream", "Thermometer", "Pain Relief Spray", "Bandages", "Medical Face Masks"],
+    items: [
+      "Antiseptic Cream",
+      "Thermometer",
+      "Pain Relief Spray",
+      "Bandages",
+      "Medical Face Masks",
+    ],
     date: "11-02-2025",
     amount: 1275,
     payment: "Paid",
-    status: "Shipped"
+    status: "Shipped",
   },
   {
     orderId: 4,
-    items: ["Pain Relief Spray", "Blood Pressure Monitor", "Digital Glucometer"],
+    items: [
+      "Pain Relief Spray",
+      "Blood Pressure Monitor",
+      "Digital Glucometer",
+    ],
     date: "08-02-2025",
     amount: 1960,
     payment: "Paid",
-    status: "Delivered"
+    status: "Delivered",
   },
   {
     orderId: 5,
@@ -201,7 +210,7 @@ const orders = [
     date: "07-02-2025",
     amount: 1500,
     payment: "Paid",
-    status: "Delivered"
+    status: "Delivered",
   },
   {
     orderId: 6,
@@ -209,23 +218,33 @@ const orders = [
     date: "10-02-2025",
     amount: 2400,
     payment: "Pending",
-    status: "Processing"
+    status: "Processing",
   },
   {
     orderId: 7,
-    items: ["Bandages", "Cotton Rolls", "Antibiotic Ointment", "Nebulizer Machine"],
+    items: [
+      "Bandages",
+      "Cotton Rolls",
+      "Antibiotic Ointment",
+      "Nebulizer Machine",
+    ],
     date: "06-02-2025",
     amount: 1999,
     payment: "Paid",
-    status: "Delivered"
+    status: "Delivered",
   },
   {
     orderId: 8,
-    items: ["Multivitamin Capsules", "Medical Face Masks", "Paracetamol Tablets", "Cough Syrup"],
+    items: [
+      "Multivitamin Capsules",
+      "Medical Face Masks",
+      "Paracetamol Tablets",
+      "Cough Syrup",
+    ],
     date: "05-02-2025",
     amount: 3480,
     payment: "Paid",
-    status: "Shipped"
+    status: "Shipped",
   },
   {
     orderId: 9,
@@ -233,15 +252,21 @@ const orders = [
     date: "04-02-2025",
     amount: 750,
     payment: "Pending",
-    status: "Processing"
+    status: "Processing",
   },
   {
     orderId: 10,
-    items: ["Digital Glucometer", "Thermometer", "Blood Pressure Monitor", "Nebulizer Machine", "Cotton Rolls"],
+    items: [
+      "Digital Glucometer",
+      "Thermometer",
+      "Blood Pressure Monitor",
+      "Nebulizer Machine",
+      "Cotton Rolls",
+    ],
     date: "03-02-2025",
     amount: 1300,
     payment: "Paid",
-    status: "Delivered"
+    status: "Delivered",
   },
   {
     orderId: 11,
@@ -249,7 +274,7 @@ const orders = [
     date: "02-02-2025",
     amount: 1550,
     payment: "Paid",
-    status: "Shipped"
+    status: "Shipped",
   },
   {
     orderId: 12,
@@ -257,32 +282,50 @@ const orders = [
     date: "01-02-2025",
     amount: 2540,
     payment: "Pending",
-    status: "Processing"
+    status: "Processing",
   },
   {
     orderId: 13,
-    items: ["Antibiotic Ointment", "Cough Syrup", "Digital Glucometer", "Multivitamin Capsules"],
+    items: [
+      "Antibiotic Ointment",
+      "Cough Syrup",
+      "Digital Glucometer",
+      "Multivitamin Capsules",
+    ],
     date: "30-01-2025",
     amount: 4196,
     payment: "Paid",
-    status: "Delivered"
+    status: "Delivered",
   },
   {
     orderId: 14,
-    items: ["Nebulizer Machine", "Thermometer", "Blood Pressure Monitor", "Paracetamol Tablets", "Antacid Tablets"],
+    items: [
+      "Nebulizer Machine",
+      "Thermometer",
+      "Blood Pressure Monitor",
+      "Paracetamol Tablets",
+      "Antacid Tablets",
+    ],
     date: "29-01-2025",
     amount: 3320,
     payment: "Paid",
-    status: "Shipped"
+    status: "Shipped",
   },
   {
     orderId: 15,
-    items: ["Cotton Rolls", "Multivitamin Capsules", "Medical Face Masks", "Pain Relief Spray", "Bandages", "Hand Sanitizer"],
+    items: [
+      "Cotton Rolls",
+      "Multivitamin Capsules",
+      "Medical Face Masks",
+      "Pain Relief Spray",
+      "Bandages",
+      "Hand Sanitizer",
+    ],
     date: "28-01-2025",
     amount: 1700,
     payment: "Pending",
-    status: "Processing"
-  }
+    status: "Processing",
+  },
 ];
 
 const ordersToPlace = [
@@ -298,12 +341,22 @@ const ordersToPlace = [
   },
   {
     orderId: 3,
-    items: ["Antiseptic Cream", "Thermometer", "Pain Relief Spray", "Bandages", "Medical Face Masks"],
+    items: [
+      "Antiseptic Cream",
+      "Thermometer",
+      "Pain Relief Spray",
+      "Bandages",
+      "Medical Face Masks",
+    ],
     amount: 1275,
   },
   {
     orderId: 4,
-    items: ["Pain Relief Spray", "Blood Pressure Monitor", "Digital Glucometer"],
+    items: [
+      "Pain Relief Spray",
+      "Blood Pressure Monitor",
+      "Digital Glucometer",
+    ],
     amount: 1960,
   },
   {
@@ -318,12 +371,22 @@ const ordersToPlace = [
   },
   {
     orderId: 7,
-    items: ["Bandages", "Cotton Rolls", "Antibiotic Ointment", "Nebulizer Machine"],
+    items: [
+      "Bandages",
+      "Cotton Rolls",
+      "Antibiotic Ointment",
+      "Nebulizer Machine",
+    ],
     amount: 1999,
   },
   {
     orderId: 8,
-    items: ["Multivitamin Capsules", "Medical Face Masks", "Paracetamol Tablets", "Cough Syrup"],
+    items: [
+      "Multivitamin Capsules",
+      "Medical Face Masks",
+      "Paracetamol Tablets",
+      "Cough Syrup",
+    ],
     amount: 3480,
   },
   {
@@ -333,7 +396,13 @@ const ordersToPlace = [
   },
   {
     orderId: 10,
-    items: ["Digital Glucometer", "Thermometer", "Blood Pressure Monitor", "Nebulizer Machine", "Cotton Rolls"],
+    items: [
+      "Digital Glucometer",
+      "Thermometer",
+      "Blood Pressure Monitor",
+      "Nebulizer Machine",
+      "Cotton Rolls",
+    ],
     amount: 1300,
   },
   {
@@ -348,21 +417,101 @@ const ordersToPlace = [
   },
   {
     orderId: 13,
-    items: ["Antibiotic Ointment", "Cough Syrup", "Digital Glucometer", "Multivitamin Capsules"],
+    items: [
+      "Antibiotic Ointment",
+      "Cough Syrup",
+      "Digital Glucometer",
+      "Multivitamin Capsules",
+    ],
     amount: 4196,
   },
   {
     orderId: 14,
-    items: ["Nebulizer Machine", "Thermometer", "Blood Pressure Monitor", "Paracetamol Tablets", "Antacid Tablets"],
+    items: [
+      "Nebulizer Machine",
+      "Thermometer",
+      "Blood Pressure Monitor",
+      "Paracetamol Tablets",
+      "Antacid Tablets",
+    ],
     amount: 3320,
   },
   {
     orderId: 15,
-    items: ["Cotton Rolls", "Multivitamin Capsules", "Medical Face Masks", "Pain Relief Spray", "Bandages", "Hand Sanitizer"],
+    items: [
+      "Cotton Rolls",
+      "Multivitamin Capsules",
+      "Medical Face Masks",
+      "Pain Relief Spray",
+      "Bandages",
+      "Hand Sanitizer",
+    ],
     amount: 1700,
-  }
+  },
 ];
 
+const ordersToDispatch = [
+  {
+    orderId: 1,
+    clientName: "Apollo Hospitals",
+    location: { city: "New Delhi", state: "Delhi", country: "India" },
+    dateOfOrder: "10-02-2025",
+    items: [
+      { itemName: "Paracetamol Tablets", quantity: 2, unitPrice: 500 },
+      { itemName: "Cough Syrup", quantity: 1, unitPrice: 600 },
+      { itemName: "Bandages", quantity: 3, unitPrice: 132 },
+    ],
+    amount: 2096,
+  },
+  {
+    orderId: 2,
+    clientName: "Fortis Healthcare",
+    location: { city: "Mumbai", state: "Maharashtra", country: "India" },
+    dateOfOrder: "09-02-2025",
+    items: [
+      { itemName: "Cough Syrup", quantity: 2, unitPrice: 1300 },
+      { itemName: "Antiseptic Cream", quantity: 1, unitPrice: 550 },
+    ],
+    amount: 3850,
+  },
+  {
+    orderId: 3,
+    clientName: "Max Healthcare",
+    location: { city: "Bengaluru", state: "Karnataka", country: "India" },
+    dateOfOrder: "11-02-2025",
+    items: [
+      { itemName: "Antiseptic Cream", quantity: 2, unitPrice: 300 },
+      { itemName: "Thermometer", quantity: 1, unitPrice: 400 },
+      { itemName: "Pain Relief Spray", quantity: 1, unitPrice: 375 },
+      { itemName: "Bandages", quantity: 2, unitPrice: 100 },
+      { itemName: "Medical Face Masks", quantity: 5, unitPrice: 20 },
+    ],
+    amount: 1275,
+  },
+  {
+    orderId: 4,
+    clientName: "Manipal Hospitals",
+    location: { city: "Hyderabad", state: "Telangana", country: "India" },
+    dateOfOrder: "08-02-2025",
+    items: [
+      { itemName: "Pain Relief Spray", quantity: 1, unitPrice: 400 },
+      { itemName: "Blood Pressure Monitor", quantity: 1, unitPrice: 1100 },
+      { itemName: "Digital Glucometer", quantity: 1, unitPrice: 460 },
+    ],
+    amount: 1960,
+  },
+  {
+    orderId: 5,
+    clientName: "Narayana Health",
+    location: { city: "Chennai", state: "Tamil Nadu", country: "India" },
+    dateOfOrder: "07-02-2025",
+    items: [
+      { itemName: "Thermometer", quantity: 1, unitPrice: 400 },
+      { itemName: "Multivitamin Capsules", quantity: 2, unitPrice: 500 },
+      { itemName: "Hand Sanitizer", quantity: 1, unitPrice: 100 },
+    ],
+    amount: 1500,
+  },
+];
 
-
-export { products, orders, ordersToPlace };
+export { products, orders, ordersToPlace, ordersToDispatch };

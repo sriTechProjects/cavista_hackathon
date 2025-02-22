@@ -1,22 +1,8 @@
 import PropTypes from "prop-types";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import {
-  Link,
-  Navigate,
-  Outlet,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
-import {
-  MdDashboard,
-  MdAnalytics,
-  MdInventory,
   MdShoppingCart,
-  MdSettings,
-  MdHelp,
   MdChevronLeft,
   MdChevronRight,
   MdMenu,
@@ -29,51 +15,18 @@ import {
   MdSettings as MdUserSettings,
 } from "react-icons/md";
 import { FaClinicMedical } from "react-icons/fa";
-import { LuHistory } from "react-icons/lu";
-import { AuthContext } from "../contexts/AuthContext";
-import axios from "axios";
-// import { AuthContext } from "./contexts/AuthContext.jsx";
 
-const SellerLayout = () => {
-  const navigate = useNavigate();
-  const { currentUser, loading, refreshLoginContext, setLoading } =
-    useContext(AuthContext);
-
+const SupplierLayout = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const location = useLocation();
 
-  const handleLogout = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/api/auth/hcInventory/logout",
-        {},
-        { withCredentials: true }
-      );
-
-      if (response.status === 200) {
-        toast.success("Logout successful!");
-        setLoading(true);
-        setTimeout(async () => {
-          await refreshLoginContext();
-          await setLoading(false);
-          navigate("/");
-        }, 1000);
-      }
-    } catch (error) {
-      console.error("Logout Error:", error.response?.data || error.message);
-      toast.error(error.response?.data?.message || "Logout failed! Try again.");
-    }
-  };
-
-  console.log(currentUser);
-
   const user = {
-    name: currentUser?.name,
-    email: currentUser?.email,
-    role: currentUser?.type,
+    name: "Amrik Bhadra",
+    email: "amk.bhk@gmail.com",
+    role: "Seller",
   };
 
   const [notifications] = useState([
@@ -100,26 +53,13 @@ const SellerLayout = () => {
   const sidebarItems = [
     {
       group: "Main",
-      items: [
-        { name: "Dashboard", icon: MdDashboard, path: "/" },
-        { name: "Analytics", icon: MdAnalytics, path: "/analytics" },
-        { name: "Inventory", icon: MdInventory, path: "/inventory" },
-        { name: "Orders", icon: MdShoppingCart, path: "/orders" },
-        { name: "History", icon: LuHistory, path: "/history" },
-      ],
-    },
-    {
-      group: "Other",
-      items: [
-        { name: "Settings", icon: MdSettings, path: "/settings" },
-        { name: "Help", icon: MdHelp, path: "/help" },
-      ],
+      items: [{ name: "Orders", icon: MdShoppingCart, path: "/supplier/" }],
     },
   ];
 
   const LogoSection = ({ collapsed, isMobile }) => (
     <Link
-      to="/seller/"
+      to="/supplier/"
       className={`
         h-16 flex items-center gap-3 px-4 border-b border-gray-200
         hover:bg-gray-50 transition-colors duration-200
@@ -284,7 +224,7 @@ const SellerLayout = () => {
 
           <div className="py-1">
             <Link
-              to="/seller/profile"
+              to="/supplier/profile"
               className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
               onClick={() => setIsProfileDropdownOpen(false)}
             >
@@ -292,7 +232,7 @@ const SellerLayout = () => {
               Profile
             </Link>
             <Link
-              to="/seller/settings"
+              to="/supplier/settings"
               className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
               onClick={() => setIsProfileDropdownOpen(false)}
             >
@@ -303,8 +243,8 @@ const SellerLayout = () => {
 
           <div className="border-t border-gray-200 py-1">
             <button
-              onClick={async () => {
-                await handleLogout();
+              onClick={() => {
+                // Add logout logic here
                 setIsProfileDropdownOpen(false);
               }}
               className="flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 w-full text-left"
@@ -318,16 +258,14 @@ const SellerLayout = () => {
     </div>
   );
 
-  return !currentUser ? (
-    <Navigate to="/auth/login" />
-  ) : (
+  return (
     <div className="flex h-screen bg-gray-50">
       {/* Desktop Sidebar - hidden on mobile */}
       <aside
         className={`
-        hidden lg:flex bg-white border-r border-gray-200 
-        transition-all duration-300 ease-in-out flex-col
-        ${isCollapsed ? "w-[80px]" : "w-[250px]"}
+          hidden lg:flex bg-white border-r border-gray-200 
+          transition-all duration-300 ease-in-out flex-col
+          ${isCollapsed ? "w-[80px]" : "w-[250px]"}
         `}
       >
         <LogoSection collapsed={isCollapsed} />
@@ -351,20 +289,17 @@ const SellerLayout = () => {
 
         <div
           className={`
-            p-4 border-t border-gray-200 mt-auto
-            ${isCollapsed ? "text-center" : ""}
-            `}
+          p-4 border-t border-gray-200 mt-auto
+          ${isCollapsed ? "text-center" : ""}
+        `}
         >
           {!isCollapsed ? (
             <>
               <div className="flex flex-col gap-2 text-sm text-gray-500 mb-4">
-                <Link to="/terms" className="hover:text-sky transition-colors">
+                <Link to="#" className="hover:text-sky transition-colors">
                   Terms & Conditions
                 </Link>
-                <Link
-                  to="/privacy"
-                  className="hover:text-sky transition-colors"
-                >
+                <Link to="#" className="hover:text-sky transition-colors">
                   Privacy Policy
                 </Link>
               </div>
@@ -412,10 +347,8 @@ const SellerLayout = () => {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Header */}
         <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4">
           <div className="flex items-center gap-4">
-            {/* Mobile menu button */}
             <button
               className="lg:hidden p-2 rounded-lg hover:bg-gray-100"
               onClick={() => setIsMobileMenuOpen(true)}
@@ -423,7 +356,6 @@ const SellerLayout = () => {
               <MdMenu className="w-6 h-6 text-gray-500" />
             </button>
 
-            {/* Desktop collapse button */}
             <button
               onClick={() => setIsCollapsed(!isCollapsed)}
               className="hidden lg:block p-2 rounded-lg hover:bg-gray-100 transition-colors"
@@ -436,31 +368,15 @@ const SellerLayout = () => {
               )}
             </button>
 
-            {/* Page Title */}
             <h1 className="text-xl font-semibold text-gray-800">
               {getPageTitle()}
             </h1>
           </div>
 
-          {/* Right Section */}
           <div className="flex items-center gap-2">
             <SearchBar />
             <NotificationDropdown />
-            {currentUser ? (
-              <ProfileDropdown />
-            ) : (
-              <div className="w-full h-full flex justify-center items-center gap-3 ">
-                <div
-                  onClick={() => navigate("/auth/login")}
-                  className="text-sm bg-blue-600 px-4 py-2 rounded-md text-white"
-                >
-                  Login
-                </div>
-                <div className="text-sm bg-blue-600 px-4 py-2 rounded-md text-white">
-                  Register
-                </div>
-              </div>
-            )}
+            <ProfileDropdown />
           </div>
         </header>
 
@@ -473,4 +389,4 @@ const SellerLayout = () => {
   );
 };
 
-export default SellerLayout;
+export default SupplierLayout;
