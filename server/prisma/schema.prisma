@@ -255,12 +255,13 @@ enum RoleType {
 }
 
 model roles {
-  role_id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  role_type String
+  role_id   String   @id @default(auto()) @map("_id") @db.ObjectId
+  role_type RoleType
   users     users[]
 }
 
 model users {
+  user_id  String  @id @default(auto()) @map("_id") @db.ObjectId
   user_id  String  @id @default(auto()) @map("_id") @db.ObjectId
   name     String
   username String
@@ -268,9 +269,12 @@ model users {
   address  String
   role     roles?  @relation(fields: [role_id], references: [role_id])
   role_id  String? @db.ObjectId
+  role_id  String? @db.ObjectId
 }
 
 model categories {
+  category_id    String         @id @default(auto()) @map("_id") @db.ObjectId
+  category_name  String
   category_id    String         @id @default(auto()) @map("_id") @db.ObjectId
   category_name  String
   sub_categories sub_category[]
@@ -282,11 +286,21 @@ model sub_category {
   category    categories @relation(fields: [category_id], references: [category_id])
   category_id String     @db.ObjectId
   products    products[]
+  subcat_id   String     @id @default(auto()) @map("_id") @db.ObjectId
+  subcat_name String
+  category    categories @relation(fields: [category_id], references: [category_id])
+  category_id String     @db.ObjectId
+  products    products[]
 }
 
 model suppliers {
   supplier_id   String     @id @default(auto()) @map("_id") @db.ObjectId
+  supplier_id   String     @id @default(auto()) @map("_id") @db.ObjectId
   supplier_name String
+  sup_email     String     @unique
+  sup_address   String
+  priority      Int
+  products      products[]
   sup_email     String     @unique
   sup_address   String
   priority      Int
@@ -297,9 +311,20 @@ model products {
   product_id       String        @id @default(auto()) @map("_id") @db.ObjectId
   product_name     String
   product_price    Float
+  product_id       String        @id @default(auto()) @map("_id") @db.ObjectId
+  product_name     String
+  product_price    Float
   threshold_amount Int
   product_qty      Int
+  product_qty      Int
   product_location String
+  sub_category     sub_category? @relation(fields: [subcat_id], references: [subcat_id])
+  subcat_id        String?       @db.ObjectId
+  supplier         suppliers?    @relation(fields: [supplier_id], references: [supplier_id])
+  supplier_id      String?       @db.ObjectId
+  batches          batches[]
+  orders           orders?       @relation(fields: [ordersOrder_id], references: [order_id])
+  ordersOrder_id   String?       @db.ObjectId
   sub_category     sub_category? @relation(fields: [subcat_id], references: [subcat_id])
   subcat_id        String?       @db.ObjectId
   supplier         suppliers?    @relation(fields: [supplier_id], references: [supplier_id])
@@ -316,9 +341,18 @@ model orders {
   status        String
   product       products[]
   product_id    String     @db.ObjectId
+  order_id      String     @id @default(auto()) @map("_id") @db.ObjectId
+  quantity      Int
+  date_of_order DateTime   @default(now())
+  status        String
+  product       products[]
+  product_id    String     @db.ObjectId
 }
 
 model batches {
+  batch_id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  batch_name        String
+  expiry_date       DateTime
   batch_id          String   @id @default(auto()) @map("_id") @db.ObjectId
   batch_name        String
   expiry_date       DateTime
@@ -326,9 +360,15 @@ model batches {
   product           products @relation(fields: [product_id], references: [product_id])
   product_id        String   @db.ObjectId
   unit              unit[]
+  product           products @relation(fields: [product_id], references: [product_id])
+  product_id        String   @db.ObjectId
+  unit              unit[]
 }
 
 model unit {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  batch    batches @relation(fields: [batch_id], references: [batch_id])
+  batch_id String  @db.ObjectId
   id       String  @id @default(auto()) @map("_id") @db.ObjectId
   batch    batches @relation(fields: [batch_id], references: [batch_id])
   batch_id String  @db.ObjectId
