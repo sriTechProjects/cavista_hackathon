@@ -1,7 +1,7 @@
-import images from "../../utils/resource/ImageProvider.util";
-import React, { useState } from "react";
+import { useState } from "react";
 import { BsShop } from "../../utils/resource/IconsProvider.util";
 import axiosInstance from "../../utils/validator/axiosInstance"
+import logo from "../../assets/images/inventory.png"
 
 import {
   InputFieldComponent,
@@ -15,8 +15,6 @@ import {
   MdEmail,
   FcGoogle,
   RiLockPasswordFill,
-  FaUserLock,
-  HiUserAdd,
   MdPhone,
 } from "../../utils/resource/IconsProvider.util";
 const SellerRegistration = () => {
@@ -88,7 +86,7 @@ const SellerRegistration = () => {
     <>
       <div className="absolute top-0 left-0 w-full bg-white flex items-center justify-between px-8 mt-2">
         <span>
-          <img src={images.logo} alt="logo" className="w-32" />
+          <img src={logo} alt="logo" className="w-32" />
         </span>
       </div>
       <div className="w-full max-w-md bg-white rounded-lg p-6 flex flex-col gap-8">
