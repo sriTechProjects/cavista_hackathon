@@ -17,10 +17,11 @@ import SellerAnalytics from "./pages/seller/SellerAnalytics";
 
 import { UserProvider } from "./contexts/UserContext";
 import SellerOrderHistory from "./pages/seller/SellerOrderHistory";
+import SupplierOrders from "./pages/supplier/SupplierOrders";
+import SupplierLayout from "./layouts/SupplierLayout";
 
 const App = () => {
   const routes = createBrowserRouter([
-
     {
       path: "/auth",
       element: <FormLayout />,
@@ -41,14 +42,14 @@ const App = () => {
           path: "reset-password",
           element: <ResetPassword />,
         },
-        
+
         {
           path: "seller-registration",
           element: <SellerRegistration />,
         },
       ],
     },
-  
+
     {
       path: "/",
       element: <SellerLayout />,
@@ -72,6 +73,16 @@ const App = () => {
         {
           path: "/analytics",
           element: <SellerAnalytics />,
+        },
+      ],
+    },
+    {
+      path: "/supplier",
+      element: <SupplierLayout />,
+      children: [
+        {
+          path: "",
+          element: <SupplierOrders />,
         },
       ],
     },

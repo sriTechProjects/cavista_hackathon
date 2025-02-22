@@ -35,6 +35,7 @@ model Address {
   createdAt DateTime     @default(now())
   updatedAt DateTime     @updatedAt
   inventory HCInventory?
+  Order     Order[]
 }
 
 model Product {
@@ -52,6 +53,8 @@ model Product {
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   supplier      Supplier       @relation(fields: [supplierId], references: [id])
+  Order         Order?         @relation(fields: [orderId], references: [id])
+  orderId       String?        @db.ObjectId
 }
 
 model Supplier {
@@ -61,6 +64,7 @@ model Supplier {
   password       String
   phoneNo        String
   inchargeName   String
+  orders         Order[]
   products       Product[]
   suppliedAssets String[]      @default([]) // This is fine, as it's a scalar array
   twoFactorAuth  Boolean       @default(false)
@@ -69,6 +73,32 @@ model Supplier {
   HCInventory    HCInventory?  @relation(fields: [hCInventoryId], references: [id])
   hCInventoryId  String?       @db.ObjectId
   ShopAddress    ShopAddress[]
+}
+
+model Order {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  clientName  String
+  address     Address   @relation(fields: [addressId], references: [id])
+  dateOfOrder DateTime
+  Items       Item[]
+  products    Product[]
+  amount      Float
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  Supplier    Supplier? @relation(fields: [supplierId], references: [id])
+  supplierId  String?   @db.ObjectId
+  addressId   String    @db.ObjectId
+}
+
+model Item {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  itemName  String
+  quantity  Int
+  unitPrice Float
+  order     Order?   @relation(fields: [orderId], references: [id])
+  orderId   String?  @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model ShopAddress {
