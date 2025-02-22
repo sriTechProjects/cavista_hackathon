@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/dbSetup");
 const cookieParser = require("cookie-parser");
+const authorize = require('./config/authorize');
 
 const app = express();
 const authRoutes = require("./routes/auth/authRoutes");
@@ -24,6 +25,8 @@ app.use(express.json());
 
 // Routes
 app.use("/api/saarthi/auth", authRoutes);
+
+app.get('/users',authorize(["Admin"]),getAllusers);
 
 const PORT = process.env.PORT || 8000;
 
