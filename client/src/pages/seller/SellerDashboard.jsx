@@ -14,7 +14,7 @@ import {
 const SellerDashboard = () => {
   return (
     <>
-      <div className="kpi-cards-div w-full rounded-md py-2 flex justify-between gap-x-4">
+      <div className="kpi-cards-div w-full rounded-md py-2 flex flex-col md:flex-row gap-2 md:justify-between md:gap-x-4">
         <KpiCards
           title="Total Products"
           icon={<FaProductHunt />}
@@ -40,7 +40,7 @@ const SellerDashboard = () => {
         />
       </div>
 
-      <div className="chartdiv w-full rounded-md flex gap-x-4 mt-2">
+      <div className="chartdiv w-full rounded-md flex flex-col gap-2 md:gap-3 md:flex-row gap-x-4 mt-2">
         <BarChart />
         <DoughnutChart />
       </div>
