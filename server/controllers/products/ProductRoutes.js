@@ -21,8 +21,7 @@ const createProduct = async (req, res) => {
     if (!product_name || !product_price || !product_qty || !product_location) {
       return res.status(400).json({ error: "Missing required fields" });
     }
-  
-    
+
     const newProduct = await prisma.products.create({
       data: {
         product_name,
@@ -50,7 +49,28 @@ const AllProducts = async (req, res) => {
   }
 };
 
+const deleteProduct = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletedProduct = await prisma.products.delete({
+      where: {
+        product_id: id,
+      },
+    });
+    return res.status(200).json({
+      message: "Product Deleted Successfully",
+      success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: "Failed to delete product",
+      details: error.message,
+    });
+  }
+};
+
 router.post("/create", createProduct);
 router.get("/getAll", AllProducts);
+router.delete("/del/:id", deleteProduct);
 
 module.exports = router;
