@@ -22,7 +22,7 @@ const createProduct = async (req, res) => {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    const newProduct = await prisma.product.create({
+    const newProduct = await prisma.products.create({
       data: {
         product_name,
         product_price,
@@ -45,7 +45,7 @@ const createProduct = async (req, res) => {
 
 const AllProducts = async (req, res) => {
   try {
-    const products = await prisma.product.findMany();
+    const products = await prisma.products.findMany();
     res.json(products);
   } catch (error) {
     console.error("Error fetching products:", error);
