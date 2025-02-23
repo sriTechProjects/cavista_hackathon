@@ -12,6 +12,8 @@ const HealthCareRoutes = require("./controllers/HealthCareInventory/Crud");
 const createRoutes = require("./controllers/createRoutes");
 const order = require("./controllers/order");
 const ProductsRoutes = require("./controllers/products/ProductRoutes");
+const OrderRoutes = require("./controllers/orders/orderRoutes");
+const OrderHistory = require("./controllers/seller/orderHistory");
 
 const app = express();
 const server = http.createServer(app);
@@ -50,8 +52,10 @@ app.use("/api", TokenVerify);
 app.use("/api/hcInventory", HealthCareRoutes);
 app.use("/api", createRoutes);
 app.use("/api/restock", order);
+app.use("/api",OrderHistory);
 
 app.use("/api/products", ProductsRoutes);
+app.use("/api/orders", OrderRoutes);
 
 // Start server on PORT
 const PORT = process.env.PORT || 8000;

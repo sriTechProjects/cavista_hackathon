@@ -29,6 +29,8 @@ const createProduct = async (req, res) => {
         threshold_amount,
         product_qty,
         product_location,
+        // If you want to store subcategory or other fields, add them here:
+        // subcategory: subcategory,
       },
     });
 
