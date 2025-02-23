@@ -12,11 +12,7 @@ import { IoSearch } from "react-icons/io5";
 import { IoAdd } from "react-icons/io5";
 
 const ITEMS_PER_PAGE = 10;
-const getStatustColor = (status) => {
-  return status === "Available"
-    ? "bg-success-op text-success border border-success"
-    : "bg-danger-op text-danger border border-danger";
-};
+
 
 const AuditorDashboard = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -30,28 +26,7 @@ const AuditorDashboard = () => {
   );
   return (
     <>
-      <div className="kpi-cards-div w-full rounded-md py-2 flex justify-between gap-x-4">
-        <KpiCards
-          title="Total Products"
-          description="23"
-          icon={<FaProductHunt />}
-        />
-        <KpiCards
-          title="Expired Products"
-          description="145"
-          icon={<GiCardDiscard />}
-        />
-        <KpiCards
-          title="Pending Orders"
-          description="189"
-          icon={<MdOutlinePendingActions />}
-        />
-        <KpiCards
-          title="Total Orders"
-          description="233"
-          icon={<IoBagHandle />}
-        />
-      </div>
+    
 
       <div className="relative w-full border rounded-md shadow-sm bg-white mt-2">
         {/* Header with Search Bar */}
@@ -87,10 +62,7 @@ const AuditorDashboard = () => {
               {[
                 "#",
                 "Audit Name",
-                "Category",
-                "Sub Category",
-                "Count",
-                "Status",
+                "Date",
                 "Actions",
               ].map((heading, index) => (
                 <th
@@ -108,18 +80,7 @@ const AuditorDashboard = () => {
               <tr key={audit.id} className="border-b transition text-sm">
                 <td className="py-3 px-5 text-center">{index + 1}</td>
                 <td className="py-3 px-5 text-center">{audit.auditName}</td>
-                <td className="py-3 px-5 text-center">{audit.category}</td>
-                <td className="py-3 px-5 text-center">{audit.subCategory}</td>
-                <td className="py-3 px-5 text-center">{audit.auditCount}</td>
-                <td className="py-3 px-5 text-center flex justify-center">
-                  <p
-                    className={`w-fit rounded-full px-2 py-1 ${getStatustColor(
-                      audit.status
-                    )}`}
-                  >
-                    {audit.status}
-                  </p>
-                </td>
+                <td className="py-3 px-5 text-center">{audit.date}</td>
                 <td className="py-2 px-5 text-center space-x-2">
                   <button className="bg-sky-500 border text-[#333] text-sm p-2 rounded-md hover:bg-[#333] transition-all ease-linear hover:text-white">
                     View Report

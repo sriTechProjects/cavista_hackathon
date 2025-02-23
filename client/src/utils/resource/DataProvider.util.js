@@ -517,26 +517,20 @@ const auditData = [
   {
     id: 1,
     auditName: "Financial Audit Q1",
-    category: "Finance",
-    subCategory: "Quarterly Report",
-    auditCount: 10,
-    status: "Completed"
+    date: "23-02-2025",
+    link:""
   },
   {
-    id: 2,
-    auditName: "IT Security Assessment",
-    category: "IT",
-    subCategory: "Security",
-    auditCount: 8,
-    status: "In Progress"
+    id: 1,
+    auditName: "Financial Audit Q1",
+    date: "23-02-2025",
+    link:""
   },
   {
-    id: 3,
-    auditName: "Operational Audit",
-    category: "Operations",
-    subCategory: "Efficiency",
-    auditCount: 12,
-    status: "Pending"
+    id: 1,
+    auditName: "Financial Audit Q1",
+    date: "23-02-2025",
+    link:""
   }
 ];
 
