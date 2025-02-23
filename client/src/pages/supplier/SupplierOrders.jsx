@@ -1,21 +1,50 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { ordersToDispatch } from "../../utils/resource/DataProvider.util";
 import { IoSearch } from "../../utils/resource/IconsProvider.util";
 import OrderDetails from "../../components/seller_components/seller_orders_components/OrderDetails";
+import axios from "axios";
 
 const ITEMS_PER_PAGE = 10;
 
 const SupplierOrders = () => {
+  const [orders, setOrders] = useState([]);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(ordersToDispatch.length / ITEMS_PER_PAGE);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          "http://localhost:8000/api/orderhistory"
+        );
+        // Filter out orders where the status is "Delivered"
+        const filteredOrders = response.data.filter(
+          (order) =>
+            order.status !== "Delivered" &&
+            order.client?.trim() && // Ensure client name is not empty
+            order.location?.trim() && // Ensure location is not empty
+            order.items &&
+            order.items.length > 0 // Ensure there are items in the order
+        );
+
+        setOrders(filteredOrders);
+      } catch (err) {
+        setError("Failed to fetch orders. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
+  const totalPages = Math.ceil(orders.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const displayedOrders = ordersToDispatch.slice(
-    startIndex,
-    startIndex + ITEMS_PER_PAGE
-  );
+  const displayedOrders = orders.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   return (
     <>
@@ -58,25 +87,41 @@ const SupplierOrders = () => {
 
           <tbody>
             {displayedOrders.map((order, index) => (
-              <tr key={order.id} className={"border-b transition text-sm"}>
+              <tr
+                key={order.order_id}
+                className={"border-b transition text-sm"}
+              >
                 <td className="py-3 px-5 text-left">
                   {startIndex + index + 1}
                 </td>
-                <td className="py-3 px-5 text-left">{order.clientName}</td>
-                <td className="py-3 px-5 text-left">{order.location.city}</td>
+                <td className="py-3 px-5 text-left">{order.client}</td>
+                <td className="py-3 px-5 text-left">{order.location}</td>
 
                 <td className="py-3 px-5 text-left">
-                  {order.items
-                    .map((item) => item.itemName)
-                    .slice(0, 3)
-                    .join(", ")}
-                  {order.items.length > 3 ? " ..." : ""}
+                  {order.items && order.items.length > 0 ? (
+                    <>
+                      {order.items
+                        .map((item, index) => {
+                          // Log each item with its order and index
+                          console.log(
+                            `Order ${order.order_id} - Item ${index + 1}:`,
+                            item
+                          );
+                          return item || "Unnamed Item";
+                        })
+                        .slice(0, 3)
+                        .join(", ")}
+                      {order.items.length > 3 && " ..."}
+                    </>
+                  ) : (
+                    <span className="text-gray-400">No Items</span>
+                  )}
                 </td>
 
                 {/* <td className="py-3 px-5 text-center">{order.items.length}</td> */}
                 <td className="py-3 px-5 text-center">{order.amount}</td>
 
-                <td className="py-3 px-5 text-left">{order.dateOfOrder}</td>
+                <td className="py-3 px-5 text-left">{order.date}</td>
                 <td className="text-center text-xs">
                   <div className="flex justify-center items-center gap-x-1 h-full">
                     <button

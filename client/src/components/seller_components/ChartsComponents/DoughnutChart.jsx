@@ -50,7 +50,7 @@ const DoughnutChart = () => {
   };
 
   return (
-    <div className="w-1/3 bg-white p-4 rounded-md shadow-sm border">
+    <div className="w-full md:w-1/3 bg-white p-4 rounded-md shadow-sm border">
       <header className="flex justify-between items-center mb-3">
         <h2 className="text-lg font-medium text-primary-txt">Category Sales</h2>
         <div className="flex gap-3">

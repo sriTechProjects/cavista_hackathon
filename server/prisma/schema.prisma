@@ -55,6 +55,7 @@ model Product {
   supplier      Supplier       @relation(fields: [supplierId], references: [id])
   Order         Order?         @relation(fields: [orderId], references: [id])
   orderId       String?        @db.ObjectId
+  orders        orders[]
 }
 
 model Supplier {
@@ -146,8 +147,6 @@ model users {
 model categories {
   category_id    String         @id @default(auto()) @map("_id") @db.ObjectId
   category_name  String
-  category_id    String         @id @default(auto()) @map("_id") @db.ObjectId
-  category_name  String
   sub_categories sub_category[]
 }
 
@@ -157,15 +156,9 @@ model sub_category {
   category    categories @relation(fields: [category_id], references: [category_id])
   category_id String     @db.ObjectId
   products    products[]
-  subcat_id   String     @id @default(auto()) @map("_id") @db.ObjectId
-  subcat_name String
-  category    categories @relation(fields: [category_id], references: [category_id])
-  category_id String     @db.ObjectId
-  products    products[]
 }
 
 model suppliers {
-  supplier_id   String     @id @default(auto()) @map("_id") @db.ObjectId
   supplier_id   String     @id @default(auto()) @map("_id") @db.ObjectId
   supplier_name String
   sup_email     String     @unique
@@ -192,13 +185,21 @@ model products {
 
 model orders {
   order_id          String     @id @default(auto()) @map("_id") @db.ObjectId
-  quantity          Int
+  quantity          Int        @default(0)
   date_of_order     DateTime   @default(now())
   status            String
   product           products[]
   product_id        String     @db.ObjectId
-  Product           Product?   @relation(fields: [productProduct_id], references: [product_id])
+  Product           Product?   @relation(fields: [productId], references: [id])
   productProduct_id String?    @db.ObjectId
+  productId         String?    @db.ObjectId
+}
+
+model postAudits {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  link      String
+  createdAt DateTime @default(now())
 }
 
 model batches {

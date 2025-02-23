@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import OrderStatsCards from "../../components/seller_components/seller_orders_components/OrderStatsCards";
 import { orders } from "../../utils/resource/DataProvider.util";
 import { IoSearch, BiExport } from "../../utils/resource/IconsProvider.util";
 import OrderDetails from "../../components/seller_components/seller_orders_components/OrderDetails";
+import axios from "axios";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -25,14 +26,33 @@ const getPaymentColor = (payment) => {
     : "bg-danger-op text-danger border border-danger";
 };
 const SellerOrderHistory = () => {
-    const [isDetailOpen, setIsDetailOpen] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [selectedRows, setSelectedRows] = useState([]);
-    const totalPages = Math.ceil(orders.length / ITEMS_PER_PAGE);
+  const [orders, setOrders] = useState([]);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedRows, setSelectedRows] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const totalPages = Math.ceil(orders.length / ITEMS_PER_PAGE);
+
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const displayedOrders = orders.slice(startIndex, startIndex + ITEMS_PER_PAGE);
   
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const displayedOrders = orders.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+    useEffect(() => {
+      const fetchOrders = async () => {
+        try {
+          setLoading(true);
+          const response = await axios.get("http://localhost:8000/api/orderhistory");
+          setOrders(response.data);
+        } catch (err) {
+          setError("Failed to fetch orders. Please try again.");
+        } finally {
+          setLoading(false);
+        }
+      };
   
+      fetchOrders();
+    }, []);
+
     const toggleRowSelection = (id) => {
       setSelectedRows((prev) =>
         prev.includes(id) ? prev.filter((rowId) => rowId !== id) : [...prev, id]
@@ -160,19 +180,19 @@ const SellerOrderHistory = () => {
                   <td className="py-3 px-5 text-center">
                     <p
                       className={`rounded-full p-1 ${getPaymentColor(
-                        order.payment
+                        order.payment_status
                       )}`}
                     >
-                      {order.payment}
+                      {order.payment_status}
                     </p>
                   </td>
                   <td className="py-3 px-5 text-center">
                     <p
                       className={`rounded-full p-1 ${getStatusColor(
-                        order.status
+                        order.order_status
                       )}`}
                     >
-                      {order.status}
+                      {order.order_status}
                     </p>
                   </td>
                   <td className="text-center text-xs">

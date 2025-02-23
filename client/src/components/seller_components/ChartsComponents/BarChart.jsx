@@ -88,7 +88,7 @@ const BarChart = () => {
   };
 
   return (
-    <div className="barchartDiv w-2/3 bg-white p-4 rounded-md shadow-sm border">
+    <div className="barchartDiv w-full md:w-2/3 bg-white p-4 rounded-md shadow-sm border">
       <header className="flex justify-between items-center">
         <h2 className="text-lg font-medium text-primary-txt">Annual Sales</h2>
         <select
