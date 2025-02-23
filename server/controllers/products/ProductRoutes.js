@@ -26,13 +26,9 @@ const createProduct = async (req, res) => {
       data: {
         product_name,
         product_price,
-        threshold_amount: threshold_amount || 50,
+        threshold_amount,
         product_qty,
         product_location,
-        SubCategory: subcategory,
-        supplier_id,
-        supplierId,
-        orderId,
       },
     });
 
