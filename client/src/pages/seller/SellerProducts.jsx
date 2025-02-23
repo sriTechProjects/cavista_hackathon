@@ -39,6 +39,21 @@ const SellerProducts = () => {
     }
   };
 
+  const delProducts = async (id) => {
+    console.log(id);
+    try {
+      const response = await axios.delete(
+        `http://localhost:8000/api/products/del/${id}`
+      );
+      if (response.status === 200) {
+        alert("Product Deleted Successfully");
+      }
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      alert("Failed to delete product");
+    }
+  };
+
   useEffect(() => {
     fetchProducts();
 
@@ -114,7 +129,12 @@ threshold_amount ? "Available" : "Out of Stock"}
                 </p>
               </td>
               <td className="py-2 px-5 text-center space-x-2">
-                <button className="border p-2 rounded-md">
+                <button
+                  onClick={async () => {
+                    await delProducts(product?.product_id);
+                  }}
+                  className="border p-2 rounded-md"
+                >
                   <RiDeleteBin7Line />
                 </button>
                 <button className="border p-2 rounded-md">

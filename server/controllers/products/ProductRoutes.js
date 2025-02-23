@@ -26,13 +26,9 @@ const createProduct = async (req, res) => {
       data: {
         product_name,
         product_price,
-        threshold_amount: threshold_amount || 50,
+        threshold_amount,
         product_qty,
         product_location,
-        SubCategory: subcategory,
-        supplier_id,
-        supplierId,
-        orderId,
       },
     });
 
@@ -53,7 +49,28 @@ const AllProducts = async (req, res) => {
   }
 };
 
+const deleteProduct = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletedProduct = await prisma.products.delete({
+      where: {
+        product_id: id,
+      },
+    });
+    return res.status(200).json({
+      message: "Product Deleted Successfully",
+      success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: "Failed to delete product",
+      details: error.message,
+    });
+  }
+};
+
 router.post("/create", createProduct);
 router.get("/getAll", AllProducts);
+router.delete("/del/:id", deleteProduct);
 
 module.exports = router;
