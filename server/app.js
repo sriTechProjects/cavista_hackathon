@@ -10,6 +10,8 @@ const HealthCareAuths = require("./controllers/HealthCareInventory/AuthControlle
 const SuppliersAuths = require("./controllers/Suppliers/AuthControllers");
 const TokenVerify = require("./config/TokenVerify");
 const HealthCareRoutes = require("./controllers/HealthCareInventory/Crud");
+const createRoutes = require("./controllers/createRoutes");
+const order = require("./controllers/order");
 
 app.use(
   cors({
@@ -28,6 +30,9 @@ app.use("/api/auth/hcInventory", HealthCareAuths);
 app.use("/api/auth/Suppliers", SuppliersAuths);
 app.use("/api", TokenVerify);
 app.use("/api/hcInventory", HealthCareRoutes);
+app.use("/api", createRoutes);
+app.use("/api/restock", order);
+
 
 // app.get('/users',authorize(["Admin"]),getAllusers);
 
