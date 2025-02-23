@@ -513,5 +513,31 @@ const ordersToDispatch = [
     amount: 1500,
   },
 ];
+const auditData = [
+  {
+    id: 1,
+    auditName: "Financial Audit Q1",
+    category: "Finance",
+    subCategory: "Quarterly Report",
+    auditCount: 10,
+    status: "Completed"
+  },
+  {
+    id: 2,
+    auditName: "IT Security Assessment",
+    category: "IT",
+    subCategory: "Security",
+    auditCount: 8,
+    status: "In Progress"
+  },
+  {
+    id: 3,
+    auditName: "Operational Audit",
+    category: "Operations",
+    subCategory: "Efficiency",
+    auditCount: 12,
+    status: "Pending"
+  }
+];
 
-export { products, orders, ordersToPlace, ordersToDispatch };
+export { products, orders, ordersToPlace, ordersToDispatch,auditData };
