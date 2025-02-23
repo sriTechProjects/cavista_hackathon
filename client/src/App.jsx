@@ -19,6 +19,9 @@ import { UserProvider } from "./contexts/UserContext";
 import SellerOrderHistory from "./pages/seller/SellerOrderHistory";
 import SupplierOrders from "./pages/supplier/SupplierOrders";
 import SupplierLayout from "./layouts/SupplierLayout";
+import AuditorLayout from "./layouts/AuditorLayout";
+import AuditorDashboard from "./pages/auditor/AuditorDashboard";
+import AuditorAudit from "./pages/auditor/AuditorAudit";
 
 const App = () => {
   const routes = createBrowserRouter([
@@ -86,6 +89,21 @@ const App = () => {
         },
       ],
     },
+
+    {
+      path: "/auditor",
+      element:<AuditorLayout/>,
+      children:[
+        {
+          path:"",
+          element: <AuditorDashboard/>
+        },
+        {
+          path:"audit",
+          element: <AuditorAudit/>
+        }
+      ]
+    }
   ]);
 
   return (
