@@ -14,6 +14,40 @@ const SupplierOrders = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const handleDispatch = async (order) => {
+    const emailApiUrl = "http://localhost:8000/api/send-email"; // Update with actual backend API
+  
+    try {
+      const emailData = {
+        from: "srivaths.iyer@gmail.com", // Update with sender's email
+        to: "rohan.agrawal@mitaoe.ac.in", // Ensure order object includes clientEmail
+        subject: "Order Dispatched",
+        text: `Dear ${order.client}, your order (ID: ${order.order_id}) has been dispatched.`,
+        html: `
+          <div style="text-align: center;">
+            <h2>Order Dispatched</h2>
+            <p>Dear ${order.client}, your order has been dispatched successfully.</p>
+            <p><strong>Order ID:</strong> ${order.order_id}</p>
+            <p><strong>Location:</strong> ${order.location}</p>
+            <p><strong>Amount:</strong> Rs ${order.amount}</p>
+            <p><strong>Items:</strong> ${order.items.map((item) => item).join(", ")}</p>
+            <img src="https://your-image-url.com/order-image.png" alt="Order Dispatched" width="300"/>
+            <p>Thank you for choosing us!</p>
+          </div>
+        `,
+        imagePath: "../../assets/Paracetamol.png", // If using local images (optional)
+      };
+  
+      await axios.post(emailApiUrl, emailData);
+      alert(`Dispatch email sent to ${order.client}`);
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      alert("Failed to send email. Please try again.");
+    }
+  };
+  
+  
+
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -132,7 +166,7 @@ const SupplierOrders = () => {
                     </button>
                     <button
                       className="border border-[#ccc] px-3 py-2 rounded-md font-medium text-primary-txt hover:bg-primary-btn hover:text-white transition-all ease"
-                      onClick={() => {}}
+                      onClick={() => handleDispatch(order)}
                     >
                       Dispatch
                     </button>
