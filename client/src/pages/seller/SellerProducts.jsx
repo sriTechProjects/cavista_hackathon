@@ -10,8 +10,8 @@ import axios from "axios";
 const socket = io("http://localhost:8000");
 const ITEMS_PER_PAGE = 10;
 
-const getStatusColor = (status) => {
-  return status === "Available"
+const getStatusColor = (qty, threshold) => {
+  return qty > threshold
     ? "bg-success-op text-success border border-success"
     : "bg-danger-op text-danger border border-danger";
 };
@@ -121,9 +121,11 @@ const SellerProducts = () => {
               <td className="py-3 px-5 text-center">{product.product_qty}</td>
               <td className="py-3 px-5 text-center flex justify-center">
                 <p
-                  className={`w-fit rounded-full px-2 py-1 ${getStatusColor(product.status)}`}
+                  className={`w-fit rounded-full px-2 py-1 ${getStatusColor(product.product_qty, product.
+threshold_amount)}`}
                 >
-                  {product.product_qty > 50 ? "Available" : "Out of Stock"}
+                  {product.product_qty > product.
+threshold_amount ? "Available" : "Out of Stock"}
                 </p>
               </td>
               <td className="py-2 px-5 text-center space-x-2">

@@ -9,6 +9,8 @@ const HealthCareAuths = require("./controllers/HealthCareInventory/AuthControlle
 const SuppliersAuths = require("./controllers/Suppliers/AuthControllers");
 const TokenVerify = require("./config/TokenVerify");
 const HealthCareRoutes = require("./controllers/HealthCareInventory/Crud");
+const createRoutes = require("./controllers/createRoutes");
+const order = require("./controllers/order");
 const ProductsRoutes = require("./controllers/products/ProductRoutes");
 
 const app = express();
@@ -46,6 +48,9 @@ app.use("/api/auth/hcInventory", HealthCareAuths);
 app.use("/api/auth/Suppliers", SuppliersAuths);
 app.use("/api", TokenVerify);
 app.use("/api/hcInventory", HealthCareRoutes);
+app.use("/api", createRoutes);
+app.use("/api/restock", order);
+
 app.use("/api/products", ProductsRoutes);
 
 // Start server on PORT
